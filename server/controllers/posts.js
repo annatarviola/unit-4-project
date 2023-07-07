@@ -1,3 +1,6 @@
+const { POST } = require('../models/post')
+const { USER } = require('../models/user')
+
 module.exports = {
   getAllPosts: (req, res) => {
     console.log("get all posts");
@@ -7,8 +10,21 @@ module.exports = {
     console.log("current user posts");
   },
 
-  addPost: (req, res) => {
-    console.log("add post");
+  addPost: async (req, res) => {
+    try {
+      const { title, content, status, userId } = req.body
+      await Post.create({
+        title,
+        content,
+        privateStatus: status,
+        userId
+      })
+      res.sendStatus(200)
+    } catch (err) {
+      console.log('error in getCurrentUserPosts')
+      console.log(err)
+      res.sendStatus(400)
+    }
   },
 
   editPost: (req, res) => {
