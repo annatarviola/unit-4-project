@@ -6,6 +6,7 @@ const Auth = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const authCtx = useContext(AuthContext);
 
@@ -28,6 +29,7 @@ const Auth = () => {
       .catch((err) => {
         setUsername("");
         setPassword("");
+        setErrorMessage("Error");
       });
 
     console.log("submitHandler called");
@@ -53,6 +55,7 @@ const Auth = () => {
         />
         <button className="form-btn">{register ? "Sign Up" : "Login"}</button>
       </form>
+      {errorMessage && <p className="error">{errorMessage}</p>}
       <button className="form-btn" onClick={() => setRegister(!register)}>
         Need to {register ? "Login" : "Sign Up"}?
       </button>

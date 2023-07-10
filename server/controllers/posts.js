@@ -76,7 +76,6 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       const { id } = req.params;
-      const { title, content, status } = req.body;
       await Post.destroy({ where: { id: +id } });
     } catch (err) {
       console.log("error in getCurrentUserPosts");
